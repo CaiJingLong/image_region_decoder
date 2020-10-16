@@ -51,9 +51,8 @@ class _MyAppState extends State<MyApp> {
     final srcByteData = await rootBundle.load(R.ASSETS_JPG_8000X8000_JPG);
     this.image = srcByteData.buffer.asUint8List();
     setState(() {});
-
-    // final size = ImageSizeGetter.getSize(MemoryInput(src));
-    // print('${size.width} x ${size.height}');
+    final size = ImageSizeGetter.getSize(MemoryInput(this.image));
+    print('${size.width} x ${size.height}');
 
     // final sw = Stopwatch();
     // sw.start();
