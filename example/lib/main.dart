@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:image_region_decoder/image_region_decoder.dart';
 import 'package:image_size_getter/image_size_getter.dart';
 import 'const/resource.dart';
+import 'memory_part_image.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,10 +30,11 @@ class _MyAppState extends State<MyApp> {
           child: Column(
             children: <Widget>[
               if (image != null)
-                Image.memory(
-                  image,
-                  width: 300,
-                  height: 300,
+                Image(
+                  image: MemoryPartImage(
+                    image,
+                    rect: Rect.fromLTWH(3000, 3000, 2500, 2500),
+                  ),
                 ),
               RaisedButton(
                 onPressed: _loadPartImage,
@@ -47,22 +49,30 @@ class _MyAppState extends State<MyApp> {
 
   void _loadPartImage() async {
     final srcByteData = await rootBundle.load(R.ASSETS_JPG_8000X8000_JPG);
-    final src = srcByteData.buffer.asUint8List();
-
-    final size = ImageSizeGetter.getSize(MemoryInput(src));
-    print('${size.width} x ${size.height}');
-
-    final sw = Stopwatch();
-    sw.start();
-    final result = await ImageRegionDecoder.imageInRect(
-      imageByte: src,
-      rect: Rect.fromLTWH(1500, 1500, 1800, 1800),
-    );
-    sw.stop();
-
-    print(sw.elapsedMilliseconds);
-
-    this.image = result;
+    this.image = srcByteData.buffer.asUint8List();
     setState(() {});
+
+    // final size = ImageSizeGetter.getSize(MemoryInput(src));
+    // print('${size.width} x ${size.height}');
+
+    // final sw = Stopwatch();
+    // sw.start();
+    // final result = await handleImage(
+    //   src,
+    //   Rect.fromLTWH(1500, 1500, 1800, 1800),
+    // );
+    // sw.stop();
+
+    // print(sw.elapsedMilliseconds);
+
+    // this.image = result;
+    // setState(() {});
+  }
+
+  Future<Uint8List> handleImage(Uint8List image, Rect rect) {
+    return ImageRegionDecoder.imageInRect(
+      imageByte: image,
+      rect: rect,
+    );
   }
 }
