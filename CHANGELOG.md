@@ -2,4 +2,4 @@
 
 ## 0.1.0 - First version
 
-The first version.
+The first version
