@@ -1,0 +1,22 @@
+PODS:
+  - Flutter (1.0.0)
+  - image_region_decoder (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - image_region_decoder (from `.symlinks/plugins/image_region_decoder/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  image_region_decoder:
+    :path: ".symlinks/plugins/image_region_decoder/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  image_region_decoder: 29aefdcfee9e8682601be15a712b17c98cfff257
+
+PODFILE CHECKSUM: c34e2287a9ccaa606aeceab922830efb9a6ff69a
+
+COCOAPODS: 1.9.3
